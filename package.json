@@ -1,0 +1,32 @@
+{
+  "name": "vite-plugin-virtual-modules",
+  "version": "0.1.2",
+  "description": "Vite plugin to load customize virtual modules",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p . --skipLibCheck && npm publish && git clean -f"
+  },
+  "files": [
+    "index.ts",
+    "index.js",
+    "index.js.map",
+    "index.d.ts"
+  ],
+  "keywords": [
+    "vite-plugin",
+    "virtual-modules"
+  ],
+  "author": "windson",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/windsonR/vite-plugin-virtual-modules.git"
+  },
+  "bugs": {
+    "url": "https://github.com/windsonR/vite-plugin-virtual-modules/issues"
+  },
+  "homepage": "",
+  "devDependencies": {
+    "vite": "^3.0.0"
+  }
+}
