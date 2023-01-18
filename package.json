@@ -2,15 +2,19 @@
   "name": "vite-plugin-virtual-modules",
   "version": "0.1.2",
   "description": "Vite plugin to load customize virtual modules",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
   "scripts": {
-    "build": "tsc -p . --skipLibCheck && npm publish && git clean -f"
+    "build": "tsup && npm publish && git clean -f"
   },
   "files": [
-    "index.ts",
-    "index.js",
-    "index.js.map",
-    "index.d.ts"
+    "dist"
   ],
   "keywords": [
     "vite-plugin",
@@ -27,6 +31,8 @@
   },
   "homepage": "",
   "devDependencies": {
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4",
     "vite": "^3.0.0"
   }
 }
