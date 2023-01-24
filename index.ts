@@ -6,32 +6,33 @@ export interface VirtualModuleInfo {
 }
 
 export interface VirtualModuleOptions {
+  /**
+   * declare virtual modules
+   */
   modules?: Array<VirtualModuleInfo>
+  /**
+   * prefix for virtual module
+   */
   prefix?: string
 }
+const CACHED_VIRTUAL_MODULES_MAP: Map<string,string> = new Map()
 
-export default (options: VirtualModuleOptions): Plugin => {
-  const { prefix = 'virtual', modules = [], } = options
+export default ({ prefix = 'virtual', modules = [], }: VirtualModuleOptions): Plugin => {
+  modules.forEach(({moduleName, moduleValue})=>{
+    CACHED_VIRTUAL_MODULES_MAP.set(`\0${prefix}:${moduleName}`, moduleValue)
+  })
   return {
     name: 'vite-plugin-virtual-module',
     resolveId (id) {
-      for (const module of modules) {
-        const { moduleName, } = module
-        const vName = `${prefix}:${moduleName}`
-        if (id === vName) {
-          return '\0' + vName
-        }
+      if (CACHED_VIRTUAL_MODULES_MAP.has(`\0${id}`)) {
+        return `\0${id}`
       }
     },
-    // @ts-ignore
-    load (id) {
-      for (const module of modules) {
-        const { moduleValue, moduleName, } = module
-        const vName = `\0${prefix}:${moduleName}`
-        if (id === vName) {
-          return moduleValue
-        }
+    async load (id): Promise<string|null> {
+      if (CACHED_VIRTUAL_MODULES_MAP.has(id)) {
+        return CACHED_VIRTUAL_MODULES_MAP.get(id)!
       }
+      return null
     },
   }
 }
