@@ -11,7 +11,8 @@
     }
   },
   "scripts": {
-    "build": "tsup && npm publish && git clean -f"
+    "build": "tsup && npm publish && git clean -f",
+    "dev": "vite"
   },
   "files": [
     "dist"
