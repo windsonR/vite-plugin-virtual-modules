@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-virtual-modules",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Vite plugin to load customize virtual modules",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
